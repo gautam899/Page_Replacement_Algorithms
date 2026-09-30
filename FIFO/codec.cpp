@@ -9,6 +9,12 @@ class FIFO
 public:
     int countPageFaults(const std::vector<int> &pages, const int maxFrames)
     {
+        if (maxFrames <= 0)
+        {
+            std::cerr << "Number of Max Frames available must be greater than 0" << std::endl;
+            std::exit(0);
+        }
+
         // Stores the Page References. To make it easier to remove the first in page, we use a queue.
         std::queue<int> queue;
         int faultCount = 0;
@@ -48,7 +54,7 @@ int main()
         page = std::strtok(nullptr, ",");
     }
 
-    int maxFrames = 3; // Can be taken as input from the user.
+    int maxFrames = -1; // Can be taken as input from the user.
     FIFO fifo;
     int ans = fifo.countPageFaults(pages, maxFrames);
     std::cout << ans << std::endl;
